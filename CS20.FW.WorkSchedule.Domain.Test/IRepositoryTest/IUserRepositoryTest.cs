@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using CS20.FW.WorkSchedule.Core.Model;
+using CS20.FW.WorkSchedule.Domain.IRepository;
 using CS20.FW.WorkSchedule.Domain.Test.ServiceTest;
 using Moq;
 using Xunit;
@@ -8,11 +9,11 @@ namespace CS20.FW.WorkSchedule.Domain.Test.IRepositoryTest
 {
     public class IUserRepositoryTest
     {
-        private readonly Mock<IRepository> _mock;
+        private readonly Mock<IUserRepository> _mock;
 
         public IUserRepositoryTest()
         {
-            _mock = new Mock<IRepository>();
+            _mock = new Mock<IUserRepository>();
         }
         
         #region InterfaceAvaliableTest
@@ -83,15 +84,5 @@ namespace CS20.FW.WorkSchedule.Domain.Test.IRepositoryTest
         }
         
         #endregion
-    }
-
-    public interface IRepository
-    {
-        User CreateUser(User user);
-        List<User> ReadAll();
-        User ReadById(int id);
-        User ReadByName(string name);
-        User Update(User user);
-        User Delete(User user);
     }
 }
