@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CS20.FW.WorkSchedule.Core.IService;
 using CS20.FW.WorkSchedule.Core.Model;
 using Moq;
 using Xunit;
@@ -125,14 +126,5 @@ namespace CS20.FW.WorkSchedule.Core.Test.IServiceTest
         }
 
         #endregion
-    }
-
-    public interface IUserService
-    {
-        List<User> GetUsers();
-        User GetUserById(int id);
-        User CreateUser(User user);
-        User RemoveUser(int id);
-        User UpdateUser(User user);
     }
 }
