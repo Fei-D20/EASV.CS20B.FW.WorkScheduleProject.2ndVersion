@@ -2,7 +2,11 @@ using System;
 
 namespace CS20.FW.WorkSchedule.Core.Model
 {
-    public class WorkingRecord
+    /// <summary>
+    /// The Work Record model represent the work record for each of the employee who already work
+    /// and had the record for work.
+    /// </summary>
+    public class WorkRecord
     {
         public int Id { get; set; }
         public int EmployeeId { get; set; }

@@ -11,14 +11,14 @@ namespace CS20.FW.WorkSchedule.Core.Test.ModelTest
         [Fact]
         public void WorkingSchedule_CanBeInitialize()
         {
-            var workingSchedule = new WorkingSchedule();
+            var workingSchedule = new Model.WorkSchedule();
             Assert.NotNull(workingSchedule);
         }
 
         [Fact]
         public void WorkingSchedule_ShouldHaveId()
         {
-            var workingSchedule = new WorkingSchedule()
+            var workingSchedule = new Model.WorkSchedule()
             {
                 Id = 1
             };
@@ -29,7 +29,7 @@ namespace CS20.FW.WorkSchedule.Core.Test.ModelTest
         [Fact]
         public void WorkingSchedule_ShouldHaveDay()
         {
-            var workingSchedule = new WorkingSchedule()
+            var workingSchedule = new Model.WorkSchedule()
             {
                 WeekDay = DayOfWeek.Monday
             };
@@ -40,7 +40,7 @@ namespace CS20.FW.WorkSchedule.Core.Test.ModelTest
         public void WorkingSchedule_ShouldHaveStartTime()
         {
             var dateTime = new DateTime(2021,12,1,15,0,0);
-            var workingSchedule = new WorkingSchedule
+            var workingSchedule = new Model.WorkSchedule
             {
                 StartTime = dateTime
             };
@@ -51,7 +51,7 @@ namespace CS20.FW.WorkSchedule.Core.Test.ModelTest
         public void WorkingSchedule_ShouldHaveEndTime()
         {
             var dateTime = new DateTime(2021,12,1,21,0,0);
-            var workingSchedule = new WorkingSchedule
+            var workingSchedule = new Model.WorkSchedule
             {
                 EndTime = dateTime
             };

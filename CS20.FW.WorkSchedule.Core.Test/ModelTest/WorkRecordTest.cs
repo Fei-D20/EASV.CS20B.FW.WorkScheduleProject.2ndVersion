@@ -18,14 +18,14 @@ namespace CS20.FW.WorkSchedule.Core.Test.ModelTest
             [Fact]
             public void WorkingRecord_CanBeInitial()
             {
-                var workingRecord = new WorkingRecord();
+                var workingRecord = new WorkRecord();
                 Assert.NotNull(workingRecord);
             }
 
             [Fact]
             public void WorkingRecord_HaveId()
             {
-                var workingRecord = new WorkingRecord()
+                var workingRecord = new WorkRecord()
                 {
                     Id = 1
                 };
@@ -35,7 +35,7 @@ namespace CS20.FW.WorkSchedule.Core.Test.ModelTest
             [Fact]
             public void WorkingRecord_HaveEmployeeId()
             {
-                var workingRecord = new WorkingRecord()
+                var workingRecord = new WorkRecord()
                 {
                     EmployeeId = 1
                 };
@@ -46,7 +46,7 @@ namespace CS20.FW.WorkSchedule.Core.Test.ModelTest
             public void WorkingRecord_HaveCheckInTime()
             {
                 var dateTime = DateTime.Now;
-                var workingRecord = new WorkingRecord()
+                var workingRecord = new WorkRecord()
                 {
                     CheckInTime = dateTime
                 };
@@ -57,7 +57,7 @@ namespace CS20.FW.WorkSchedule.Core.Test.ModelTest
             public void WorkingRecord_HaveCheckOutTime()
             {
                 var dateTime = DateTime.Now;
-                var workingRecord = new WorkingRecord()
+                var workingRecord = new WorkRecord()
                 {
                     CheckOutTime = dateTime
                 };
@@ -68,7 +68,7 @@ namespace CS20.FW.WorkSchedule.Core.Test.ModelTest
             public void WorkingRecord_HaveWorkingHours()
             {
                 var timeSpan = new TimeSpan(5, 0, 0);
-                var workingRecord = new WorkingRecord()
+                var workingRecord = new WorkRecord()
                 {
                     WorkingHours = timeSpan
                 };
