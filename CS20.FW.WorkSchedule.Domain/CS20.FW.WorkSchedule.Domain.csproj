@@ -4,4 +4,8 @@
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\CS20.FW.WorkSchedule.Core\CS20.FW.WorkSchedule.Core.csproj" />
+    </ItemGroup>
+
 </Project>

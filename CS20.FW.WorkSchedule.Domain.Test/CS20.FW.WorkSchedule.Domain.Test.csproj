@@ -22,6 +22,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\CS20.FW.WorkSchedule.Core\CS20.FW.WorkSchedule.Core.csproj" />
+      <ProjectReference Include="..\CS20.FW.WorkSchedule.Domain\CS20.FW.WorkSchedule.Domain.csproj" />
     </ItemGroup>
 
 </Project>
