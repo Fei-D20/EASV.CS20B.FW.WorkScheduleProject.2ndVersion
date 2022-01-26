@@ -150,13 +150,13 @@ namespace CS20.FW.WorkSchedule.Core.Test.IServiceTest
         {
             var workRecord = new WorkRecord()
             {
-                EmployeeId = 1
+                UserId = 1
             };
             var expect = new List<WorkRecord>();
             _iWorkRecordMock
-                .Setup(service => service.GetByEmployeeId(workRecord.EmployeeId))
+                .Setup(service => service.GetByUserId(workRecord.UserId))
                 .Returns(expect);
-            var actual = _iWorkRecordMock.Object.GetByEmployeeId(workRecord.EmployeeId);
+            var actual = _iWorkRecordMock.Object.GetByUserId(workRecord.UserId);
             Assert.Equal(actual,expect);
 
         }

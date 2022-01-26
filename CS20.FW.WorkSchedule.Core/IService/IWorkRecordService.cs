@@ -12,7 +12,7 @@ namespace CS20.FW.WorkSchedule.Core.IService
         WorkRecord Delete(WorkRecord workRecord);
         List<WorkRecord> GetAll();
         WorkRecord GetById(WorkRecord workRecord);
-        List<WorkRecord> GetByEmployeeId(int employeeId);
+        List<WorkRecord> GetByUserId(int userId);
         List<WorkRecord> GetByDate(DateTime dateTime);
     }
 }

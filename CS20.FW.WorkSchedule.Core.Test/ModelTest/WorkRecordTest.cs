@@ -33,13 +33,13 @@ namespace CS20.FW.WorkSchedule.Core.Test.ModelTest
             }
 
             [Fact]
-            public void WorkingRecord_HaveEmployeeId()
+            public void WorkingRecord_HaveUserId()
             {
                 var workingRecord = new WorkRecord()
                 {
-                    EmployeeId = 1
+                    UserId = 1
                 };
-                Assert.Equal(1, workingRecord.EmployeeId);
+                Assert.Equal(1, workingRecord.UserId);
             }
 
             [Fact]

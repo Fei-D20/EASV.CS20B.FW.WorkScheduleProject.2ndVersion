@@ -9,11 +9,11 @@ namespace CS20.FW.WorkSchedule.Domain.Test.IRepositoryTest
 {
     public class IUserRepositoryTest
     {
-        private readonly Mock<IUserRepository> _mock;
+        private readonly Mock<IUserRepository> _mockUserRepository;
 
         public IUserRepositoryTest()
         {
-            _mock = new Mock<IUserRepository>();
+            _mockUserRepository = new Mock<IUserRepository>();
         }
         
         #region InterfaceAvaliableTest
@@ -21,8 +21,7 @@ namespace CS20.FW.WorkSchedule.Domain.Test.IRepositoryTest
         [Fact]
         public void IUserRepository_IsAvailable()
         {
-            var repository = _mock.Object;
-            Assert.NotNull(repository);
+            Assert.NotNull(_mockUserRepository.Object);
         }
 
         #endregion
@@ -33,8 +32,8 @@ namespace CS20.FW.WorkSchedule.Domain.Test.IRepositoryTest
         public void IUserRepository_Create_ParaUser_ReturnUser()
         {
             var user = new User();
-            _mock.Setup(repository => repository.CreateUser(user)).Returns(user);
-            var actual = _mock.Object.CreateUser(user);
+            _mockUserRepository.Setup(repository => repository.CreateUser(user)).Returns(user);
+            var actual = _mockUserRepository.Object.CreateUser(user);
             Assert.Equal(user,actual);
         }
 
@@ -42,8 +41,8 @@ namespace CS20.FW.WorkSchedule.Domain.Test.IRepositoryTest
         public void IUserRepository_ReadAll_ReturnListOfUser()
         {
             var users = new List<User>();
-            _mock.Setup(repository => repository.ReadAll()).Returns(users);
-            var actual = _mock.Object.ReadAll();
+            _mockUserRepository.Setup(repository => repository.ReadAll()).Returns(users);
+            var actual = _mockUserRepository.Object.ReadAll();
             Assert.Equal(users,actual);
         }
 
@@ -51,8 +50,8 @@ namespace CS20.FW.WorkSchedule.Domain.Test.IRepositoryTest
         public void IUserRepository_ReadById_ReturnUser()
         {
             var user = new User();
-            _mock.Setup(repository => repository.ReadById(1)).Returns(user);
-            var actual = _mock.Object.ReadById(1);
+            _mockUserRepository.Setup(repository => repository.ReadById(1)).Returns(user);
+            var actual = _mockUserRepository.Object.ReadById(1);
             Assert.Equal(user,actual);
         }
 
@@ -60,8 +59,8 @@ namespace CS20.FW.WorkSchedule.Domain.Test.IRepositoryTest
         public void IUserRepository_ReadByName_ReturnUser()
         {
             var user = new User();
-            _mock.Setup(repository => repository.ReadByName("name")).Returns(user);
-            var actual = _mock.Object.ReadByName("name");
+            _mockUserRepository.Setup(repository => repository.ReadByName("name")).Returns(user);
+            var actual = _mockUserRepository.Object.ReadByName("name");
             Assert.Equal(user,actual);
         }
 
@@ -69,8 +68,8 @@ namespace CS20.FW.WorkSchedule.Domain.Test.IRepositoryTest
         public void IUserRepository_Update_ParaUser_ReturnUser()
         {
             var user = new User();
-            _mock.Setup(repository => repository.Update(user)).Returns(user);
-            var actual = _mock.Object.Update(user);
+            _mockUserRepository.Setup(repository => repository.Update(user)).Returns(user);
+            var actual = _mockUserRepository.Object.Update(user);
             Assert.Equal(user,actual);
         }
 
@@ -78,8 +77,8 @@ namespace CS20.FW.WorkSchedule.Domain.Test.IRepositoryTest
         public void IUserRepository_Delete_ParaUser_ReturnUser()
         {
             var user = new User();
-            _mock.Setup(repository => repository.Delete(user)).Returns(user);
-            var actual = _mock.Object.Delete(user);
+            _mockUserRepository.Setup(repository => repository.Delete(user)).Returns(user);
+            var actual = _mockUserRepository.Object.Delete(user);
             Assert.Equal(user,actual);
         }
         

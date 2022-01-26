@@ -25,17 +25,18 @@ namespace CS20.FW.WorkSchedule.Core.Test.ModelTest
             Assert.Equal(1,workingSchedule.Id);
 
         }
-
+        
         [Fact]
-        public void WorkingSchedule_ShouldHaveDay()
+        public void WorkingSchedule_ShouldHaveUserId()
         {
             var workingSchedule = new Model.WorkSchedule()
             {
-                WeekDay = DayOfWeek.Monday
+                UserId = 1
             };
-            Assert.Equal(DayOfWeek.Monday, workingSchedule.WeekDay);
+            Assert.Equal(1,workingSchedule.UserId);
+
         }
-        
+
         [Fact]
         public void WorkingSchedule_ShouldHaveStartTime()
         {
