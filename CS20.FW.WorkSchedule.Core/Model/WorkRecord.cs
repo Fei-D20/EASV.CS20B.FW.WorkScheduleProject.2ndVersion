@@ -9,7 +9,7 @@ namespace CS20.FW.WorkSchedule.Core.Model
     public class WorkRecord
     {
         public int Id { get; set; }
-        public int EmployeeId { get; set; }
+        public int UserId { get; set; }
         public DateTime CheckInTime { get; set; }
         public DateTime CheckOutTime { get; set; }
         public TimeSpan WorkingHours { get; set; }

@@ -1,3 +1,4 @@
+using System;
 using CS20.FW.WorkSchedule.Core.Model;
 using Xunit;
 
@@ -51,19 +52,16 @@ namespace CS20.FW.WorkSchedule.Core.Test.ModelTest
         
         
         /// <summary>
-        /// Test about user should have property string password and it can be null.
+        /// Test about user should have property string password 
         /// </summary>
         [Fact]
-        public void User_ShouldHavePassword_CanBeNull()
+        public void User_ShouldHavePassword()
         {
             var user = new User()
             {
-                Password = null
+                Password = "password"
             };
-            Assert.Null(user.Password);
-            user.Password = "user";
-            Assert.True(user.Password is not null);
-            Assert.Equal("user",user.Password );
+            Assert.Equal("password",user.Password );
 
         }
 
@@ -76,10 +74,10 @@ namespace CS20.FW.WorkSchedule.Core.Test.ModelTest
         {
             var user = new User()
             {
-                Role = Role.Admin
+                Role = Role.Employee
             };
-            user.Role = Role.Employee;
             Assert.Equal(Role.Employee, user.Role);
+            Assert.True(user.Role is Enum);
         }
         
         #endregion
