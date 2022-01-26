@@ -155,7 +155,7 @@ namespace CS20.FW.WorkSchedule.Domain.Test.ServiceTest
             // Arrange
             var user = new User()
             {
-                Name = "feiNotHappy..",
+                Name = "name5",
                 Password = password,
                 Role = Role.Employee
             };
