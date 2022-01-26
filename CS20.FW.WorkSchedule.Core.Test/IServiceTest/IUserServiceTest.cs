@@ -58,11 +58,11 @@ namespace CS20.FW.WorkSchedule.Core.Test.IServiceTest
         }
         
         [Fact]
-        public void IUserService_Remove_ParameterId_ReturnUser()
+        public void IUserService_Remove_ParameterUser_ReturnUser()
         {
             var user = new User();
-            _mock.Setup(service => service.RemoveUser(1)).Returns(user);
-            var actual = _mock.Object.RemoveUser(1);
+            _mock.Setup(service => service.RemoveUser(user)).Returns(user);
+            var actual = _mock.Object.RemoveUser(user);
             Assert.Equal(user, actual);
         }
         

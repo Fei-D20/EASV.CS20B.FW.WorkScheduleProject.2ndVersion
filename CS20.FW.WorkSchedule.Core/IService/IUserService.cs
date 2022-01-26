@@ -8,7 +8,7 @@ namespace CS20.FW.WorkSchedule.Core.IService
         List<User> GetUsers();
         User GetUserById(int id);
         User CreateUser(User user);
-        User RemoveUser(int id);
+        User RemoveUser(User user);
         User UpdateUser(User user);
     }
 }
