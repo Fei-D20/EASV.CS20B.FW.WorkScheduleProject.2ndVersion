@@ -1,10 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using CS20.FW.WorkSchedule.Core.IService;
 using CS20.FW.WorkSchedule.Core.Model;
 using CS20.FW.WorkSchedule.Domain.IRepository;
+using CS20.FW.WorkSchedule.Domain.Service;
 using Moq;
 using Xunit;
 
@@ -21,6 +21,7 @@ namespace CS20.FW.WorkSchedule.Domain.Test.ServiceTest
         {
             _mockUserRepository = new Mock<IUserRepository>();
             _userService = new UserService(_mockUserRepository.Object);
+            
             _users = new List<User>();
             _users.Add(new User()
             {
@@ -123,14 +124,15 @@ namespace CS20.FW.WorkSchedule.Domain.Test.ServiceTest
 
         [Theory]
         [InlineData("")]
-        [InlineData("123")]
+        [InlineData("123456789012")] // min -1
+        [InlineData("1234567890123456789012345678901")] // max -1
 
         public void UserService_Create_ParameterUserWithNotEnoughPassword_ThrowException(string password)
         {
             // Arrange
             var user = new User()
             {
-                Name = "feiNotHappy..",
+                Name = "name",
                 Password = password,
                 Role = Role.Employee
             };
@@ -139,11 +141,14 @@ namespace CS20.FW.WorkSchedule.Domain.Test.ServiceTest
             // Act
             var invalidDataException = Assert.Throws<InvalidDataException>(() => _userService.CreateUser(user));
             // Assert
-            Assert.Equal("Please input password more than 13 letters", invalidDataException.Message);
+            Assert.Equal("Please input password more than 13 letters and not more than 30!", invalidDataException.Message);
         }
 
         [Theory]
         [InlineData("1234567890123")]
+        [InlineData("12345678901234")]
+        [InlineData("12345678901234567890123456789")] // min -1
+
 
         public void UserService_Create_ParameterUserWithEnoughPassword_ReturnUser(string password)
         {
@@ -197,6 +202,7 @@ namespace CS20.FW.WorkSchedule.Domain.Test.ServiceTest
         [Theory]
         [InlineData(0)]
         [InlineData(-1)]
+        [InlineData(-2)]
         public void UserService_GetById_ParaWrongId_ThrowException(int id)
         {
             // Arrange
@@ -314,87 +320,3 @@ namespace CS20.FW.WorkSchedule.Domain.Test.ServiceTest
         #endregion
     }
 }
-
-
-    public class UserService : IUserService
-    {
-        private readonly IUserRepository _userRepository;
-
-        public UserService(IUserRepository userRepository)
-        {
-            _userRepository = userRepository ?? throw new InvalidDataException("The Repository can not be null");
-        }
-
-        public List<User> GetUsers()
-        {
-            return _userRepository.ReadAll();
-        }
-
-        public User GetUserById(int id)
-        {
-            if (id <= 0)
-            {
-                throw new InvalidDataException("The user id can not be 0 or smaller!");
-            }
-
-            var readById = _userRepository.ReadById(id);
-            if (readById == null)
-            {
-                throw new TargetException("The user is not exist!");
-            }
-            return readById;
-        }
-
-        public User CreateUser(User user)
-        {
-            if (user.Id != 0)
-            {
-                throw new InvalidDataException("The user's id should not be input!");
-            }
-
-            if (user.Password.Length < 13)
-            {
-                throw new InvalidDataException("Please input password more than 13 letters");
-            }
-            return _userRepository.CreateUser(user);
-        }
-
-        public User RemoveUser(User user)
-        {
-            var delete = _userRepository.Delete(user);
-            if (delete == null)
-            {
-                throw new TargetException("The user is not exist!");
-            }
-
-            return delete;
-        }
-
-        public User UpdateUser(User user)
-        {
-            var updateUser = _userRepository.Update(user);
-            if (updateUser == null)
-            {
-                throw new TargetException("The user is not exist!");
-            }
-
-            return updateUser;
-        }
-    }
-
-    public class Comparer : IEqualityComparer<User>
-    {
-        public bool Equals(User x, User y)
-        {
-            if (ReferenceEquals(x, y)) return true;
-            if (ReferenceEquals(x, null)) return false;
-            if (ReferenceEquals(y, null)) return false;
-            if (x.GetType() != y.GetType()) return false;
-            return x.Id == y.Id && x.Name == y.Name && x.Password == y.Password && x.Role == y.Role;
-        }
-
-        public int GetHashCode(User obj)
-        {
-            return HashCode.Combine(obj.Id, obj.Name, obj.Password, (int)obj.Role);
-        }
-    }
