@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CS20.FW.WorkSchedule.Core.Model;
+using CS20.FW.WorkSchedule.Domain.IRepository;
 using Moq;
 using Xunit;
 
@@ -80,18 +81,15 @@ namespace CS20.FW.WorkSchedule.Domain.Test.IRepositoryTest
             var actual = _mockWorkRecordRepository.Object.ReadByWeek(DayOfWeek.Friday);
             Assert.Equal(_workRecords,actual);
         }
-        
+
+        [Fact]
+        public void IWorkRecordRepository_ReadByUserIdAndMonth_PareUserIdAndDateTime_ReturnListOfWorkRecord()
+        {
+            _mockWorkRecordRepository.Setup(repository => repository.ReadByUserIdAndMonth(1,DateTime.Today)).Returns(_workRecords);
+            var actual = _mockWorkRecordRepository.Object.ReadByUserIdAndMonth(1,DateTime.Today);
+            Assert.Equal(_workRecords,actual);
+        }
         
         #endregion
-    }
-
-    public interface IWorkRecordRepository
-    {
-        WorkRecord Create(WorkRecord workRecord);
-        List<WorkRecord> ReadAll();
-        WorkRecord ReadById(int id);    
-        List<WorkRecord> ReadByUserId(int id);
-        List<WorkRecord> ReadByDate(DateTime dateTime);
-        List<WorkRecord> ReadByWeek(DayOfWeek dayOfWeek);
     }
 }
