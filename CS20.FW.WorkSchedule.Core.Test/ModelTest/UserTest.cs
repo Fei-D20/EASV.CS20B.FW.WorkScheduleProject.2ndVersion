@@ -18,6 +18,7 @@ namespace CS20.FW.WorkSchedule.Core.Test.ModelTest
         {
             var user = new User();
             Assert.NotNull(user);
+            var user1 = new User();
         }
 
         
