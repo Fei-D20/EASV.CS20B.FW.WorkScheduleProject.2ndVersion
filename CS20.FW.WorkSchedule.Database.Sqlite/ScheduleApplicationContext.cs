@@ -1,3 +1,4 @@
+using CS20.FW.WorkSchedule.Database.Entity;
 using CS20.FW.WorkSchedule.Database.Repository;
 using Microsoft.EntityFrameworkCore;
 
