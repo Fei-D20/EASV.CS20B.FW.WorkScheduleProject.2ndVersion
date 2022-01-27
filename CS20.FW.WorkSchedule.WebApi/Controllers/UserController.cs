@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CS20.FW.WorkSchedule.Core.IService;
 using CS20.FW.WorkSchedule.WebApi.Model;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CS20.FW.WorkSchedule.WebApi.Controllers
@@ -31,12 +27,7 @@ namespace CS20.FW.WorkSchedule.WebApi.Controllers
                 var userDtos = new List<UserDto>();
                 foreach (var user in users)
                 {
-                    userDtos.Add(new UserDto()
-                    {
-                        Id = user.Id,
-                        Name = user.Name,
-                        Role = user.Role
-                    });
+                    userDtos.Add(new UserDtoConvert().ConverterUserDto(user));
                 }
 
                 return Ok(userDtos.ToArray());
