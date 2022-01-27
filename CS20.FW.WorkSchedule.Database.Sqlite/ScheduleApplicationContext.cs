@@ -10,8 +10,5 @@ namespace CS20.FW.WorkSchedule.Database
         }
 
         public virtual DbSet<UserEntity> Users { get; set; }
-        public virtual DbSet<WorkRecordEntity> WorkRecords { get; set; }
-        public virtual DbSet<WorkScheduleEntity> WorkSchedules { get; set; }
-
     }
 }

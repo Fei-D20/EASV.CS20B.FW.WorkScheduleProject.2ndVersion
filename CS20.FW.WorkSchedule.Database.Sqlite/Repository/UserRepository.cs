@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using CS20.FW.WorkSchedule.Core.Model;
 using CS20.FW.WorkSchedule.Domain.IRepository;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -7,50 +9,67 @@ namespace CS20.FW.WorkSchedule.Database.Repository
 {
     public class UserRepository:IUserRepository
     {
-        private ScheduleApplicationContext _scheduleApplicationContext;
+        private readonly ScheduleApplicationContext _scheduleApplicationContext;
 
         public UserRepository(ScheduleApplicationContext scheduleApplicationContext)
         {
-            _scheduleApplicationContext = scheduleApplicationContext;
+            _scheduleApplicationContext 
+                = scheduleApplicationContext 
+                  ?? throw new InvalidDataException("Repository should have a DbContext!");
         }
 
-        public User CreateUser(User user)
+        public User CreateUser(User user) 
         {
-            var userEntity = new Convert().Converter(user);
+            var userEntity = new UserConvert().ConverterToEntity(user);
             _scheduleApplicationContext.Users.Add(userEntity);
+            _scheduleApplicationContext.SaveChanges();
             
-            return new Convert().Converter(userEntity);
+            return new UserConvert().ConverterToUser(userEntity);
         }
 
         public List<User> ReadAll()
         {
-            throw new System.NotImplementedException();
+            return _scheduleApplicationContext.Users.Select(entity => new User()
+            {
+                Id = entity.Id,
+                Name = entity.Name,
+                Password = entity.Name,
+                Role = entity.Role
+            }).ToList();
         }
 
         public User ReadById(int id)
         {
-            throw new System.NotImplementedException();
+            return _scheduleApplicationContext
+                .Users.Select(entity => new UserConvert().ConverterToUser(entity))
+                .FirstOrDefault(user => user.Id == id);
         }
 
         public User ReadByName(string name)
         {
-            throw new System.NotImplementedException();
+            return _scheduleApplicationContext
+                .Users.Select(entity => new UserConvert().ConverterToUser(entity))
+                .FirstOrDefault(user => user.Name.Equals(name));
         }
 
         public User Update(User user)
         {
-            throw new System.NotImplementedException();
+            _scheduleApplicationContext.Users.Update(new UserConvert().ConverterToEntity(user));
+            _scheduleApplicationContext.SaveChanges();
+            return user;
         }
 
         public User Delete(User user)
         {
-            throw new System.NotImplementedException();
+            _scheduleApplicationContext.Users.Remove(new UserConvert().ConverterToEntity(user));
+            _scheduleApplicationContext.SaveChanges();
+            return user;
         }
     }
 
-    public class Convert
+    public class UserConvert
     {
-        public UserEntity Converter(User user)
+        public UserEntity ConverterToEntity(User user)
         {
             return new UserEntity()
             {
@@ -61,7 +80,7 @@ namespace CS20.FW.WorkSchedule.Database.Repository
             };
         }
 
-        public User Converter(UserEntity userEntity)
+        public User ConverterToUser(UserEntity userEntity)
         {
             return new User()
             {
@@ -71,14 +90,6 @@ namespace CS20.FW.WorkSchedule.Database.Repository
                 Role = userEntity.Role
             };
         }
-    }
-
-    public class WorkScheduleEntity
-    {
-    }
-
-    public class WorkRecordEntity
-    {
     }
 
     public class UserEntity
