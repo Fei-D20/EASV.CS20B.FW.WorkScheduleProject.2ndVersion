@@ -14,5 +14,6 @@ namespace CS20.FW.WorkSchedule.Core.IService
         WorkRecord GetById(WorkRecord workRecord);
         List<WorkRecord> GetByUserId(int userId);
         List<WorkRecord> GetByDate(DateTime dateTime);
+        List<WorkRecord> GetByUserIdAndMonth(int id, DateTime dateTime);
     }
 }

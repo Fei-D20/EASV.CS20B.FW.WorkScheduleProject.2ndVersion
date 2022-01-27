@@ -141,22 +141,19 @@ namespace CS20.FW.WorkSchedule.Core.Test.IServiceTest
         }
         
         /// <summary>
-        /// This is test get by employee id
-        /// parameter is the id which employee we want to search
-        /// return is the list of all record by the employee
+        /// This is test get by user id
+        /// parameter is the id which user we want to search
+        /// return is the list of all record by the user
         /// </summary>
         [Fact]
-        public void IWorkRecordTest_GetByEmployeeId_ParaRecord_ReturnListOfRecord()
+        public void IWorkRecordTest_GetByUserId_ParaId_ReturnListOfRecord()
         {
-            var workRecord = new WorkRecord()
-            {
-                UserId = 1
-            };
+            
             var expect = new List<WorkRecord>();
             _iWorkRecordMock
-                .Setup(service => service.GetByUserId(workRecord.UserId))
+                .Setup(service => service.GetByUserId(1))
                 .Returns(expect);
-            var actual = _iWorkRecordMock.Object.GetByUserId(workRecord.UserId);
+            var actual = _iWorkRecordMock.Object.GetByUserId(1);
             Assert.Equal(actual,expect);
 
         }
@@ -170,17 +167,23 @@ namespace CS20.FW.WorkSchedule.Core.Test.IServiceTest
         public void IWorkRecordTest_GetByDate_ParaDate_ReturnListOfRecord()
         {
             var dateTime = new DateTime(2021,12,1);
-            var workRecord = new WorkRecord()
-            {
-                CheckInTime = dateTime
-            };
-            var workingRecords = new List<WorkRecord>();
+            
+            var workRecords = new List<WorkRecord>();
             _iWorkRecordMock
-                .Setup(service => service.GetByDate(workRecord.CheckInTime))
-                .Returns(workingRecords);
-            var byDate = _iWorkRecordMock.Object.GetByDate(workRecord.CheckInTime);
-            Assert.Equal(byDate,workingRecords);
+                .Setup(service => service.GetByDate(dateTime))
+                .Returns(workRecords);
+            var byDate = _iWorkRecordMock.Object.GetByDate(dateTime);
+            Assert.Equal(byDate,workRecords);
 
+        }
+
+        [Fact]
+        public void IWorkRecordTest_GetByUserIdAndMonth_ParaUserIdAndMonth_ReturnListOfRecord()
+        {
+            var workRecords = new List<WorkRecord>();
+            _iWorkRecordMock.Setup(service => service.GetByUserIdAndMonth(1, DateTime.Today)).Returns(workRecords);
+            var actual = _iWorkRecordMock.Object.GetByUserIdAndMonth(1,DateTime.Today);
+            Assert.Equal(actual,workRecords);
         }
         #endregion
     }
